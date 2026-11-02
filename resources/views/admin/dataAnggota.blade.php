@@ -43,7 +43,7 @@
                 <!-- Kanan -->
                 <div class="flex items-center gap-4">
 
-                 
+
                     <!-- User -->
                     <div class="hidden md:flex items-center gap-2">
 
@@ -322,7 +322,8 @@
 
                                                 <button type="SUBMIT" title="Hapus"
                                                     class="w-8 h-8 rounded-lg bg-red-100
-                                   text-red-600 hover:bg-red-200">
+                                   text-red-600 hover:bg-red-200"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus anggota ini?')">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </div>
@@ -374,4 +375,3 @@
 </body>
 
 </html>
-```

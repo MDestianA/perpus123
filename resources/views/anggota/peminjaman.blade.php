@@ -51,14 +51,16 @@
                             <i class="fa-solid fa-user"></i>
                         </div>
 
-                         <div>
-                            <p class="text-sm font-semibold text-gray-700">
+                         <div class="flex flex-col">
+                            <a href="{{ route('anggota.profil') }}"
+                                class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition">
                                 {{ Auth::user()->name }}
-                            </p>
+                            </a>
 
-                            <p class="text-xs text-gray-500">
+                            <a href="{{ route('anggota.profil') }}"
+                                class="text-xs text-gray-500 hover:text-blue-500 transition">
                                 {{ ucfirst(Auth::user()->role) }}
-                            </p>
+                            </a>
                         </div>
 
                     </div>

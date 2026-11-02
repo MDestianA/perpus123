@@ -9,9 +9,14 @@ use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
+use App\Models\Buku;
+
 Route::get('/', function () {
-    return view('index');
-});
+    $buku = Buku::latest()->get();
+
+    return view('index', compact('buku'));
+})->name('home');
 
 // Route yang membutuhkan autentikasi
 Route::middleware('auth')->group(function () {
@@ -26,6 +31,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/anggota/peminjaman', [PeminjamanController::class, 'indexAnggota'])
         ->name('anggota.peminjaman');
+
+  // Profil Anggota
+Route::get('/anggota/profil', [AController::class, 'profil'])
+    ->name('anggota.profil');
+
+Route::put('/anggota/profil', [AController::class, 'updateProfil'])
+    ->name('anggota.profil.update');
+
+Route::put('/anggota/password', [AController::class, 'updatePassword'])
+    ->name('anggota.password.update');
 
     // Halaman Buku Anggota
     Route::get('/anggota/buku', [AController::class, 'buku'])

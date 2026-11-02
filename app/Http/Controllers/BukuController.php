@@ -26,21 +26,27 @@ class BukuController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'judul' => 'required',
-            'penulis' => 'required',
-            'penerbit' => 'required',
-            'tahun_terbit' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
-            'stok' => 'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $validated = $request->validate([
+        'judul' => 'required|string|max:255',
+        'penulis' => 'required|string|max:255',
+        'penerbit' => 'required|string|max:255',
+        'tahun_terbit' => 'required|integer',
+        'stok' => 'required|integer|min:0',
+        'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+    ]);
 
-        Buku::create($request->all());
-
-        return redirect()->route('buku.index')
-                         ->with('success', 'Book created successfully.');
+    // Upload gambar
+    if ($request->hasFile('gambar')) {
+        $validated['gambar'] = $request->file('gambar')
+            ->store('buku', 'public');
     }
+
+    Buku::create($validated);
+
+    return redirect()->back()
+        ->with('success', 'Buku berhasil ditambahkan!');
+}
 
     public function show(Buku $buku)
     {

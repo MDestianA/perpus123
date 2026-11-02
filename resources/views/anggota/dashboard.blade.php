@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,8 +11,7 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body class="bg-gray-100">
@@ -29,14 +27,12 @@
                 <div class="flex items-center gap-4">
 
                     <!-- Hamburger -->
-                    <button @click="sidebarOpen = !sidebarOpen"
-                        class="text-gray-600 hover:text-blue-600 text-xl">
+                    <button @click="sidebarOpen = !sidebarOpen" class="text-gray-600 hover:text-blue-600 text-xl">
                         <i class="fa-solid fa-bars"></i>
                     </button>
 
                     <!-- Logo -->
-                    <a href="/dashboard"
-                        class="text-xl font-bold text-blue-600">
+                    <a href="/dashboard" class="text-xl font-bold text-blue-600">
                         <i class="fa-solid fa-book-open mr-2"></i>
                         Perpustakaan Digital
                     </a>
@@ -46,25 +42,30 @@
                 <!-- Kanan -->
                 <div class="flex items-center gap-4">
 
-                   
+
 
                     <!-- User -->
-                    <div class="hidden md:flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-3">
 
-                        <div
-                            class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center">
+
+
+                        <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center">
                             <i class="fa-solid fa-user"></i>
                         </div>
 
-                        <div>
-                            <p class="text-sm font-semibold text-gray-700">
+                        <div class="flex flex-col">
+                            <a href="{{ route('anggota.profil') }}"
+                                class="text-sm font-semibold text-gray-700 hover:text-blue-600 transition">
                                 {{ Auth::user()->name }}
-                            </p>
+                            </a>
 
-                            <p class="text-xs text-gray-500">
+                            <a href="{{ route('anggota.profil') }}"
+                                class="text-xs text-gray-500 hover:text-blue-500 transition">
                                 {{ ucfirst(Auth::user()->role) }}
-                            </p>
+                            </a>
                         </div>
+
+
 
                     </div>
 
@@ -122,8 +123,8 @@
                 </a>
 
 
-         
-         
+
+
                 <div class="border-t border-gray-200 my-5"></div>
 
 
@@ -170,7 +171,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
 
-              
+
                 <!-- Sedang Dipinjam -->
                 <div class="bg-white rounded-xl shadow-sm p-5">
 
@@ -183,11 +184,11 @@
                             </p>
 
                             <h2 class="text-3xl font-bold text-gray-800 mt-2">
-                                25
+                                {{ $totalPeminjaman }}
                             </h2>
 
                             <p class="text-xs text-blue-600 mt-2">
-                                <i class="fa-solid fa-book-open"></i>
+                                <i class="fa-solid fa-book"></i>
                                 Buku sedang dipinjam
                             </p>
 
@@ -197,7 +198,7 @@
                             class="w-12 h-12 rounded-lg bg-yellow-100
                             text-yellow-600 flex items-center justify-center">
 
-                            <i class="fa-solid fa-hand-holding-heart text-xl"></i>
+                            <i class="fa-solid fa-book-open text-xl"></i>
 
                         </div>
 
@@ -233,308 +234,139 @@
 
                         </div>
 
-                        <a href="/anggota/loans"
-                            class="text-sm text-blue-600 hover:text-blue-800">
+                        <a href="/anggota/loans" class="text-sm text-blue-600 hover:text-blue-800">
                             Lihat semua
                         </a>
 
                     </div>
 
-
-                    <div class="overflow-x-auto">
-
-                        <table class="w-full text-sm">
-
-                            <thead class="bg-gray-50">
-
-                                <tr>
-
-                                    <th class="text-left px-5 py-3 text-gray-500">
-                                        Anggota
-                                    </th>
-
-                                    <th class="text-left px-5 py-3 text-gray-500">
-                                        Buku
-                                    </th>
-
-                                    <th class="text-left px-5 py-3 text-gray-500">
-                                        Tanggal
-                                    </th>
-
-                                    <th class="text-left px-5 py-3 text-gray-500">
-                                        Status
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody class="divide-y divide-gray-100">
-
-
-                                <tr class="hover:bg-gray-50">
-
-                                    <td class="px-5 py-4">
-
-                                        <div class="flex items-center gap-3">
-
-                                            <div
-                                                class="w-9 h-9 bg-blue-100 text-blue-600
-                                                rounded-full flex items-center justify-center">
-
-                                                <i class="fa-solid fa-user"></i>
-
-                                            </div>
-
-                                            <span class="font-medium">
-                                                Budi
-                                            </span>
-
-                                        </div>
-
-                                    </td>
-
-                                    <td class="px-5 py-4">
-                                        Atomic Habits
-                                    </td>
-
-                                    <td class="px-5 py-4 text-gray-500">
-                                        12 Sep 2026
-                                    </td>
-
-                                    <td class="px-5 py-4">
-
-                                        <span
-                                            class="px-3 py-1 rounded-full
-                                            bg-yellow-100 text-yellow-700 text-xs">
-
-                                            Dipinjam
-
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-                                <tr class="hover:bg-gray-50">
-
-                                    <td class="px-5 py-4">
-
-                                        <div class="flex items-center gap-3">
-
-                                            <div
-                                                class="w-9 h-9 bg-green-100 text-green-600
-                                                rounded-full flex items-center justify-center">
-
-                                                <i class="fa-solid fa-user"></i>
-
-                                            </div>
-
-                                            <span class="font-medium">
-                                                Andi
-                                            </span>
-
-                                        </div>
-
-                                    </td>
-
-                                    <td class="px-5 py-4">
-                                        Clean Code
-                                    </td>
-
-                                    <td class="px-5 py-4 text-gray-500">
-                                        11 Sep 2026
-                                    </td>
-
-                                    <td class="px-5 py-4">
-
-                                        <span
-                                            class="px-3 py-1 rounded-full
-                                            bg-green-100 text-green-700 text-xs">
-
-                                            Dikembalikan
-
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-                                <tr class="hover:bg-gray-50">
-
-                                    <td class="px-5 py-4">
-
-                                        <div class="flex items-center gap-3">
-
-                                            <div
-                                                class="w-9 h-9 bg-purple-100 text-purple-600
-                                                rounded-full flex items-center justify-center">
-
-                                                <i class="fa-solid fa-user"></i>
-
-                                            </div>
-
-                                            <span class="font-medium">
-                                                Siti
-                                            </span>
-
-                                        </div>
-
-                                    </td>
-
-                                    <td class="px-5 py-4">
-                                        Deep Work
-                                    </td>
-
-                                    <td class="px-5 py-4 text-gray-500">
-                                        10 Sep 2026
-                                    </td>
-
-                                    <td class="px-5 py-4">
-
-                                        <span
-                                            class="px-3 py-1 rounded-full
-                                            bg-red-100 text-red-700 text-xs">
-
-                                            Terlambat
-
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Buku Populer -->
-
-                <div class="bg-white rounded-xl shadow-sm">
-
-                    <div class="p-5 border-b border-gray-200">
-
-                        <h2 class="font-bold text-gray-800">
-                            Buku Populer
-                        </h2>
-
-                        <p class="text-sm text-gray-500">
-                            Buku yang sering dipinjam
-                        </p>
-
-                    </div>
-
-
-                    <div class="p-5 space-y-5">
-
-
-                        <div class="flex items-center gap-4">
-
-                            <div
-                                class="w-12 h-14 bg-blue-100 rounded-lg
-                                flex items-center justify-center text-blue-600">
-
-                                <i class="fa-solid fa-book text-xl"></i>
-
-                            </div>
-
-                            <div class="flex-1">
-
-                                <h3 class="font-semibold text-sm">
-                                    Atomic Habits
-                                </h3>
-
-                                <p class="text-xs text-gray-500">
-                                    James Clear
-                                </p>
-
-                                <p class="text-xs text-blue-600 mt-1">
-                                    35 kali dipinjam
-                                </p>
-
-                            </div>
-
+                    @if (session('success'))
+                        <div class="mb-5 rounded-lg bg-green-100 p-4 text-green-700">
+                            {{ session('success') }}
                         </div>
+                    @endif
 
+                    @if ($peminjaman->isEmpty())
+                        <div class="rounded-xl bg-white p-10 text-center shadow-sm">
+                            <h2 class="text-xl font-semibold text-gray-700">
+                                Belum Ada Pengajuan
+                            </h2>
 
-                        <div class="flex items-center gap-4">
+                            <p class="mt-2 text-gray-500">
+                                Kamu belum mengajukan peminjaman buku.
+                            </p>
 
-                            <div
-                                class="w-12 h-14 bg-green-100 rounded-lg
-                                flex items-center justify-center text-green-600">
-
-                                <i class="fa-solid fa-book text-xl"></i>
-
-                            </div>
-
-                            <div class="flex-1">
-
-                                <h3 class="font-semibold text-sm">
-                                    Clean Code
-                                </h3>
-
-                                <p class="text-xs text-gray-500">
-                                    Robert C. Martin
-                                </p>
-
-                                <p class="text-xs text-blue-600 mt-1">
-                                    29 kali dipinjam
-                                </p>
-
-                            </div>
-
+                            <a href="{{ route('anggota.buku') }}"
+                                class="mt-5 inline-block rounded-lg bg-blue-600 px-5 py-3 text-white hover:bg-blue-700">
+                                Lihat Katalog Buku
+                            </a>
                         </div>
+                    @else
+                        <div class="overflow-x-auto">
+
+                            <table class="w-full text-sm">
+
+                                <thead class="bg-gray-50">
+
+                                    <tr>
+
+                                        <th class="text-left px-5 py-3 text-gray-500">
+                                            No
+                                        </th>
+
+                                        <th class="text-left px-5 py-3 text-gray-500">
+                                            Buku
+                                        </th>
+
+                                        <th class="text-left px-5 py-3 text-gray-500">
+                                            Tanggal Pengajuan
+                                        </th>
+
+                                        <th class="text-left px-5 py-3 text-gray-500">
+                                            Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody class="divide-y divide-gray-100">
+
+                                    @foreach ($peminjaman as $item)
+                                        <tr class="hover:bg-gray-50">
+
+                                            <td class="px-5 py-4">
+
+                                                <div class="flex items-center gap-3">
+
+                                                    {{ $peminjaman->firstItem() + $loop->index }}
 
 
-                        <div class="flex items-center gap-4">
 
-                            <div
-                                class="w-12 h-14 bg-purple-100 rounded-lg
-                                flex items-center justify-center text-purple-600">
+                                                </div>
 
-                                <i class="fa-solid fa-book text-xl"></i>
+                                            </td>
 
+                                            <td class="px-5 py-4">
+                                                {{ $item->buku->judul ?? 'Buku tidak ditemukan' }}
+                                            </td>
+
+                                            <td class="px-5 py-4 text-gray-500">
+                                                {{ $item->tanggal_pinjam }}
+                                            </td>
+
+                                            <td class="px-5 py-4">
+
+                                                @php
+                                                    $status = strtolower($item->status ?? 'menunggu');
+
+                                                    $warna = match ($status) {
+                                                        'disetujui', 'dipinjam' => 'bg-green-100 text-green-700',
+                                                        'ditolak' => 'bg-red-100 text-red-700',
+                                                        'dikembalikan' => 'bg-blue-100 text-blue-700',
+                                                        default => 'bg-yellow-100 text-yellow-700',
+                                                    };
+                                                @endphp
+
+                                                <span
+                                                    class="rounded-full px-3 py-1 text-xs font-semibold {{ $warna }}">
+                                                    {{ ucfirst($status) }}
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+
+
+
+
+
+
+
+
+                                </tbody>
+
+                            </table>
+                            <div class="mt-6">
+                                {{ $peminjaman->links() }}
                             </div>
-
-                            <div class="flex-1">
-
-                                <h3 class="font-semibold text-sm">
-                                    Deep Work
-                                </h3>
-
-                                <p class="text-xs text-gray-500">
-                                    Cal Newport
-                                </p>
-
-                                <p class="text-xs text-blue-600 mt-1">
-                                    24 kali dipinjam
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
+                    @endif
                 </div>
 
             </div>
 
 
-         
-        </main>
+
+
+    </div>
+
+
+
+    </main>
 
     </div>
 
 </body>
 
 </html>
-```

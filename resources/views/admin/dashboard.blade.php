@@ -397,14 +397,14 @@
                         </div>
 
                         <span class="font-medium text-gray-800">
-                            {{ $item->user_id }}
+                            {{ $item->user?->name ?? '-' }}
                         </span>
                     </div>
                 </td>
 
                 <!--  -->
                 <td class="px-5 py-4 text-gray-600">
-                    {{ $item->buku_id }}
+                    {{ $item->buku?->judul ?? '-' }}
                 </td>
 
                 <!--  -->
@@ -414,7 +414,7 @@
 
                 <!--  -->
                 <td class="px-5 py-4 text-gray-600">
-                    {{ $item->tanggal_kembali }}
+                    {{ $item->tanggal_jatuh_tempo }}
                 </td>
                 <td class="px-5 py-4 text-gray-600">
                     {{ $item->status }}

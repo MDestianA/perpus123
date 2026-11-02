@@ -200,22 +200,16 @@
 
                     <div>
                         <h2 class="font-bold text-gray-800">
-                            Daftar Anggota
+                            Daftar Peminjaman
                         </h2>
 
                         <p class="text-sm text-gray-500">
-                            Data anggota perpustakaan
+                            Data peminjaman perpustakaan
                         </p>
                     </div>
 
                     <!-- Tombol hanya tampilan -->
-                    <button type="button"
-                        class="bg-blue-600 hover:bg-blue-700 text-white
-                       px-4 py-2 rounded-lg text-sm
-                       flex items-center gap-2">
-                        <i class="fa-solid fa-plus"></i>
-                        Tambah Anggota
-                    </button>
+                    
 
                 </div>
 

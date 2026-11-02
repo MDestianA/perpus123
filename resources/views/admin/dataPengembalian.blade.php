@@ -199,22 +199,20 @@
 
                     <div>
                         <h2 class="font-bold text-gray-800">
-                            Daftar Anggota
+                            Daftar pengembalian buku
                         </h2>
 
-                        <p class="text-sm text-gray-500">
-                            Data anggota perpustakaan
-                        </p>
+                        
                     </div>
 
-                    <!-- Tombol hanya tampilan -->
-                    <button type="button"
+                     <!-- Tombol hanya tampilan -->
+                    {{-- <a href=""
                         class="bg-blue-600 hover:bg-blue-700 text-white
                        px-4 py-2 rounded-lg text-sm
                        flex items-center gap-2">
                         <i class="fa-solid fa-plus"></i>
-                        Tambah Anggota
-                    </button>
+                        Tambah Buku
+                    </a> --}}
 
                 </div>
 
@@ -223,10 +221,6 @@
                 <div class="overflow-x-auto">
 
                     <div class="container mx-auto px-4 py-8">
-
-                        <h1 class="mb-6 text-2xl font-bold text-gray-800">
-                            Data Pengembalian Buku
-                        </h1>
 
                         @if (session('success'))
                             <div class="mb-4 rounded-lg bg-green-100 p-4 text-green-700">
@@ -325,7 +319,7 @@
 
                                             <!-- Tanggal Pengembalian -->
                                             <td class="px-5 py-4 text-gray-600">
-                                                {{ $item->tanggal_pengembalian ? \Carbon\Carbon::parse($item->tanggal_pengembalian)->format('d-m-Y') : '-' }}
+                                                {{ $item->tanggal_kembali ? \Carbon\Carbon::parse($item->tanggal_pengembalian)->format('d-m-Y') : '-' }}
                                             </td>
 
                                             <!-- Denda -->
