@@ -52,7 +52,7 @@
                             <i class="fa-solid fa-user"></i>
                         </div>
 
-                    
+
                         <div>
                             <p class="text-sm font-semibold text-gray-700">
                                 {{ Auth::user()->name }}
@@ -62,7 +62,7 @@
                                 {{ ucfirst(Auth::user()->role) }}
                             </p>
                         </div>
-                      
+
 
                     </div>
 
@@ -223,168 +223,183 @@
 
 
                 <!-- Tabel -->
-                <div class="overflow-x-auto">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
+                <!-- Search Buku -->
+                <form action="{{ route('buku.index') }}" method="GET" class="mb-5 mx-5 flex flex-col gap-3 sm:flex-row">
+
+                    <div class="relative flex-1">
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari judul atau penulis buku..."
+                            class="w-full rounded-xl border border-gray-300 bg-white py-3 pl-11 pr-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+                    </div>
+
+                    <button type="submit"
+                        class="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">
+                        <i class="fa-solid fa-magnifying-glass mr-1"></i>
+                        Cari Buku
+                    </button>
+
+                    @if (request('search'))
+                        <a href="{{ route('buku.index') }}"
+                            class="rounded-xl bg-gray-200 px-6 py-3 text-center font-semibold text-gray-700 hover:bg-gray-300">
+                            Reset
+                        </a>
                     @endif
-                    <table class="w-full text-sm">
 
-                        <!-- Header -->
-                        <thead class="bg-gray-50 border-b border-gray-200">
+                </form>
+                <table class="w-full text-sm">
 
-                            <tr>
+                    <!-- Header -->
+                    <thead class="bg-gray-50 border-b border-gray-200">
 
-                                <th class="px-5 py-4 text-left font-semibold text-gray-600">
-                                    No
-                                </th>
+                        <tr>
 
-                                <th class="px-5 py-4 text-left font-semibold text-gray-600">
-                                    Kategori
-                                </th>
+                            <th class="px-5 py-4 text-left font-semibold text-gray-600">
+                                No
+                            </th>
 
-                                <th class="px-5 py-4 text-left font-semibold text-gray-600">
-                                    Judul
-                                </th>
+                            <th class="px-5 py-4 text-left font-semibold text-gray-600">
+                                Kategori
+                            </th>
 
-                                <th class="px-5 py-4 text-left font-semibold text-gray-600">
-                                    Penulis
-                                </th>
+                            <th class="px-5 py-4 text-left font-semibold text-gray-600">
+                                Judul
+                            </th>
 
-                                <th class="px-5 py-4 text-left font-semibold text-gray-600">
-                                    Penerbit
-                                </th>
+                            <th class="px-5 py-4 text-left font-semibold text-gray-600">
+                                Penulis
+                            </th>
 
-                                <th class="px-5 py-4 text-center font-semibold text-gray-600">
-                                    Tahun Terbit
-                                </th>
-                                <th class="px-5 py-4 text-center font-semibold text-gray-600">
-                                    Stok 
-                                </th>
+                            <th class="px-5 py-4 text-left font-semibold text-gray-600">
+                                Penerbit
+                            </th>
 
-                                <th class="px-5 py-4 text-center font-semibold text-gray-600">
-                                    Aksi
-                                </th>
+                            <th class="px-5 py-4 text-center font-semibold text-gray-600">
+                                Tahun Terbit
+                            </th>
+                            <th class="px-5 py-4 text-center font-semibold text-gray-600">
+                                Stok
+                            </th>
 
-                            </tr>
+                            <th class="px-5 py-4 text-center font-semibold text-gray-600">
+                                Aksi
+                            </th>
 
-                        </thead>
+                        </tr>
+
+                    </thead>
 
 
-                        <!-- Data -->
-                        <tbody class="divide-y divide-gray-100">
-                            @forelse ($buku as $index => $item)
-                                <tr class="hover:bg-gray-50">
-                                    <!-- Nomor -->
-                                    <td class="px-5 py-4">
-                                        {{ $buku->firstItem() + $index }}
-                                    </td>
+                    <!-- Data -->
+                    <tbody class="divide-y divide-gray-100">
+                        @forelse ($buku as $index => $item)
+                            <tr class="hover:bg-gray-50">
+                                <!-- Nomor -->
+                                <td class="px-5 py-4">
+                                    {{ $buku->firstItem() + $index }}
+                                </td>
 
-                                    <!-- Nama -->
-                                    <td class="px-5 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-9 h-9 rounded-full
-                                    bg-blue-100 text-blue-600
-                                    flex items-center justify-center">
-                                                <i class="fa-solid fa-user"></i>
-                                            </div>
+                                <!-- Nama -->
+                                <td class="px-5 py-4">
+                                    <div class="flex items-center gap-3">
 
-                                            <span class="font-medium text-gray-800">
-                                                {{ $item->id_kategori }}
-                                            </span>
-                                        </div>
-                                    </td>
 
-                                    <!--  -->
-                                    <td class="px-5 py-4 text-gray-600">
-                                        {{ $item->judul }}
-                                    </td>
+                                        <span class=" text-gray-800">
+                                            {{ $item->kategori?->nama_kategori ?? '-' }}
+                                        </span>
+                                    </div>
+                                </td>
 
-                                    <!--  -->
-                                    <td class="px-5 py-4 text-gray-600">
-                                        {{ $item->penulis }}
-                                    </td>
+                                <!--  -->
+                                <td class="px-5 py-4 text-gray-600">
+                                    {{ $item->judul }}
+                                </td>
 
-                                    <!--  -->
-                                    <td class="px-5 py-4 text-gray-600">
-                                        {{ $item->penerbit }}
-                                    </td>
-                                    <td class="px-5 py-4 text-gray-600">
-                                        {{ $item->tahun_terbit }}
-                                    </td>
-                                    <td class="px-5 py-4 text-gray-600">
-                                        {{ $item->stok }}
-                                    </td>
+                                <!--  -->
+                                <td class="px-5 py-4 text-gray-600">
+                                    {{ $item->penulis }}
+                                </td>
 
-                                    <!-- Aksi: tampilan saja -->
-                                    <td class="px-5 py-4">
-                                        <div class="flex justify-center gap-2">
-                                            <form action="{{ route('buku.destroy', $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Apakah kamu yakin ingin menghapus data buku ini?')">
+                                <!--  -->
+                                <td class="px-5 py-4 text-gray-600">
+                                    {{ $item->penerbit }}
+                                </td>
+                                <td class="px-5 py-4 text-gray-600">
+                                    {{ $item->tahun_terbit }}
+                                </td>
+                                <td class="px-5 py-4 text-gray-600">
+                                    {{ $item->stok }}
+                                </td>
 
-                                                <div class="flex justify-center gap-2">
-                                                    {{-- <button type="button" title="Lihat"
+                                <!-- Aksi: tampilan saja -->
+                                <td class="px-5 py-4">
+                                    <div class="flex justify-center gap-2">
+                                        <form action="{{ route('buku.destroy', $item->id) }}" method="POST"
+                                            onsubmit="return confirm('Apakah kamu yakin ingin menghapus data buku ini?')">
+
+                                            <div class="flex justify-center gap-2">
+                                                {{-- <button type="button" title="Lihat"
                                                         class="w-8 h-8 rounded-lg bg-blue-100
                                    text-blue-600 hover:bg-blue-200">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button> --}}
 
-                                                    <a href="{{ route('buku.edit', $item->id) }}" title="Edit"
-                                                        class="flex h-8 w-8 items-center justify-center rounded-lg
+                                                <a href="{{ route('buku.edit', $item->id) }}" title="Edit"
+                                                    class="flex h-8 w-8 items-center justify-center rounded-lg
            bg-yellow-100 text-yellow-600 hover:bg-yellow-200">
-                                                        <i class="fa-solid fa-pen"></i>
-                                                    </a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" title="Hapus"
-                                                        class="w-8 h-8 rounded-lg bg-red-100
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" title="Hapus"
+                                                    class="w-8 h-8 rounded-lg bg-red-100
                                    text-red-600 hover:bg-red-200"
-                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="px-5 py-8 text-center text-gray-500">
-                                        <i class="fa-solid fa-book text-3xl mb-3 block"></i>
-                                        Belum ada data Buku.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="px-5 py-8 text-center text-gray-500">
+                                    <i class="fa-solid fa-book text-3xl mb-3 block"></i>
+                                    Belum ada data Buku.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
 
-                    </table>
-                    <!-- Pagination -->
-                    <div
-                        class="flex flex-col sm:flex-row items-center justify-between
+                </table>
+                <!-- Pagination -->
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-between
             gap-4 px-5 py-4 border-t border-gray-200">
 
-                        <p class="text-sm text-gray-500">
-                            Menampilkan
-                            {{ $buku->firstItem() ?? 0 }}
-                            sampai
-                            {{ $buku->lastItem() ?? 0 }}
-                            dari
-                            {{ $buku->total() }} buku
-                        </p>
+                    <p class="text-sm text-gray-500">
+                        Menampilkan
+                        {{ $buku->firstItem() ?? 0 }}
+                        sampai
+                        {{ $buku->lastItem() ?? 0 }}
+                        dari
+                        {{ $buku->total() }} buku
+                    </p>
 
-                        <div>
-                            {{ $buku->links() }}
-                        </div>
-
+                    <div>
+                        {{ $buku->links() }}
                     </div>
 
                 </div>
 
             </div>
 
-        </main>
+    </div>
+
+    </main>
 
     </div>
 

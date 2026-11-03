@@ -4,18 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Buku;
+use App\Models\Kategori;
 
 class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $buku = Buku::paginate(10);
+    public function index(Request $request)
+{
+    $search = $request->search;
 
-        return view('admin.dataBuku', compact('buku'));
-    }
+    $buku = Buku::with('kategori')
+        ->when($search, function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                  ->orWhere('penulis', 'like', "%{$search}%");
+            });
+        })
+        ->latest()
+        ->paginate(10)
+        ->withQueryString();
+
+    $kategori = Kategori::latest()->get();
+
+    return view('admin.dataBuku', compact('buku', 'kategori'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -26,27 +40,27 @@ class BukuController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'judul' => 'required|string|max:255',
-        'penulis' => 'required|string|max:255',
-        'penerbit' => 'required|string|max:255',
-        'tahun_terbit' => 'required|integer',
-        'stok' => 'required|integer|min:0',
-        'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-    ]);
+    {
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'penulis' => 'required|string|max:255',
+            'penerbit' => 'required|string|max:255',
+            'tahun_terbit' => 'required|integer',
+            'stok' => 'required|integer|min:0',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
 
-    // Upload gambar
-    if ($request->hasFile('gambar')) {
-        $validated['gambar'] = $request->file('gambar')
-            ->store('buku', 'public');
+        // Upload gambar
+        if ($request->hasFile('gambar')) {
+            $validated['gambar'] = $request->file('gambar')
+                ->store('buku', 'public');
+        }
+
+        Buku::create($validated);
+
+        return redirect()->back()
+            ->with('success', 'Buku berhasil ditambahkan!');
     }
-
-    Buku::create($validated);
-
-    return redirect()->back()
-        ->with('success', 'Buku berhasil ditambahkan!');
-}
 
     public function show(Buku $buku)
     {
@@ -72,7 +86,7 @@ class BukuController extends Controller
         $buku->update($request->all());
 
         return redirect()->route('buku.index')
-                         ->with('success', 'Book updated successfully.');
+            ->with('success', 'Book updated successfully.');
     }
 
     public function destroy(Buku $buku)
@@ -80,6 +94,6 @@ class BukuController extends Controller
         $buku->delete();
 
         return redirect()->route('buku.index')
-                         ->with('success', 'Book deleted successfully.');
+            ->with('success', 'Book deleted successfully.');
     }
 }
