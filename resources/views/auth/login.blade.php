@@ -135,12 +135,12 @@
                         </span>
                     </label>
 
-                    @if (Route::has('password.request'))
+                    {{-- @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}"
                             class="text-sm font-medium text-blue-600 hover:text-blue-800">
                             Lupa password?
                         </a>
-                    @endif
+                    @endif --}}
 
                 </div>
 
@@ -153,7 +153,7 @@
                     Masuk
                 </button>
 
-                {{-- <!-- Register -->
+                <!-- Register -->
                 <div class="mt-7 text-center">
                     <p class="text-sm text-gray-600">
                         Belum punya akun?
@@ -163,7 +163,7 @@
                             Daftar sekarang
                         </a>
                     </p>
-                </div> --}}
+                </div>
 
             </form>
 

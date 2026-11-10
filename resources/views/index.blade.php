@@ -59,7 +59,7 @@
 
                 <!-- Login Desktop -->
                 <div class="hidden md:block">
-                    <a href="/login"
+                    <a href="{{ route('login') }}"
                         class="bg-blue-600 text-white px-5 py-2 rounded-lg
                         hover:bg-blue-700 transition duration-300 shadow-sm hover:shadow-md">
                         Login
@@ -115,7 +115,7 @@
                         Contact
                     </a>
 
-                    <a href="/login"
+                    <a href="{{ route('login') }}"
                         class="bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition">
                         Login
                     </a>

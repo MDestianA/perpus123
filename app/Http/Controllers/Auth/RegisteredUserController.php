@@ -41,12 +41,17 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'anggota',
         ]);
 
-        event(new Registered($user));
+        // Langsung login setelah registrasi
+    Auth::login($user);
 
-        Auth::login($user);
+    // Membuat session baru
+    $request->session()->regenerate();
 
-        return redirect(route('login', absolute: false));
+    // Langsung masuk dashboard anggota
+    return redirect()->route('anggota.dashboard')
+        ->with('success', 'Registrasi berhasil! Selamat datang.');
     }
 }
