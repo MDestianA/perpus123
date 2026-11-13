@@ -211,11 +211,11 @@
 
 
             <!-- ================= CONTENT GRID ================= -->
- @if (session('success'))
-                        <div class="mb-5 rounded-lg bg-green-100 p-4 text-green-700">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+            @if (session('success'))
+                <div class="mb-5 rounded-lg bg-green-100 p-4 text-green-700">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
 
@@ -244,7 +244,7 @@
 
                     </div>
 
-                   
+
 
                     @if ($peminjaman->isEmpty())
                         <div class="rounded-xl bg-white p-10 text-center shadow-sm">
